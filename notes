@@ -1,0 +1,788 @@
+This file contains documentation for all functions in ising3d.
+
+functions by category:
+
+// clusters
+
+void cmd_clusters();
+
+	Gives statistics on the clusters in the current lattice.
+	
+// data
+
+void cmd_abs();
+
+	command-line arguments: (input data index) (output data index)
+	
+	Gets the absolute value of each input number and saves the result in the output data
+	index.
+	
+void cmd_add();
+
+	command-line arguments: (input data index) (output data index) (number)
+	
+	Adds (number) to each element in the input data list.
+	
+void cmd_avg();
+
+	command-line arguments: (data index)
+	
+	Gives the average of the data.
+	
+void cmd_bins();
+
+	command-line arguments: (data index) (size of each bin)
+	
+	Breaks a list of numbers into bins, computes the average of each bin, and then computes
+	the average of all bin averages. The error on on the average of bin averages is also
+	given.
+	
+	(size of each bin) is the number of numbers in each bin.
+	
+void cmd_breg();
+
+	command-line arguments: (flips data index) (blinker regions data index) (plot steps)
+	
+	Evolve the current lattice for (plot steps) steps and saves the blinker regions.
+
+void cmd_cmplat();
+
+	command-line arguments: (seeds low data index) (seeds high data index) (first prefix) (second prefix) (number of spins in lattice) (number of runs)
+	
+	Compares the values of the spins in two groups of lattice files.
+	
+	u-(first prefix)-(seed) is compared with u-(second prefix)-(seed)
+	d-(first prefix)-(seed) is compared with d-(second prefix)-(seed)
+
+	The lattice files were saved previously by 'svlat'.
+	
+void cmd_cnt();
+
+	command-line arguments: (data index) (minimum value) (maximum value)
+	
+	Gives the number of elements in the list between (minimum value) and (maximum value).
+
+void cmd_conste();
+
+	command-line arguments: (energy index) (time index) (flips index)
+	
+	Gives data on the drop in energy that occurred after the longest lived constant-energy
+	metastable state.
+
+void cmd_dd();
+
+	command-line arguments: (data index)
+	
+	Frees (data index) from memory.
+
+void cmd_dindex();
+
+	Deletes all entries from the parallel processing list.
+	
+void cmd_disp();
+
+	command-line arguments: (data index) (first element) (last element)
+	
+	Prints the elements in the list between positions (first element) and (last element).
+
+void cmd_div();
+
+	command-line arguments: (input data index) (output data index) (number)
+
+	Divides (number) from each element in the input data list.
+	
+void cmd_divarray();
+
+	command-line arguments: (input data index numerator) (input data index denominator) (output data index)
+
+	Divides each number in the numerator data index by its corresponding number in the denominator
+	data index and stores the quotient in the output data index.
+	
+void cmd_dt();
+
+	Deletes all entries from the tag list.
+	
+void cmd_filerng();
+
+	command-line arguments: (rng file name)
+	
+	Uses the seed saved in the given file as the random number seed.
+	The seed was saved to the file previously by 'step_lattice_rng'.
+
+void cmd_filespins();
+
+	command-line arguments: (spins file name)
+	
+	Uses the spins saved in the given file as the initial lattice.
+	The spins were saved to the file previously by 'step_lattice_rng'.
+
+void cmd_flt();
+
+	command-line arguments: (data index) (minimum value) (maximum value)
+	
+	Filters data in the tag list.
+
+void cmd_index();
+
+	command-line arguments: (data index) (size in bytes)
+	
+	Tells all processes in a parallel computation that the data in (data index) is to be
+	transferred to the master process when each calculation is complete.
+	
+	(size in bytes) is the size of each individual process's data index.
+
+void cmd_initstat();
+
+	Gives properties of the initial lattice.
+	
+void cmd_log10();
+
+	command-line arguments: (input data index) (output data index)
+	
+	Computes the base 10 logarithm of each element in the input list.
+
+void cmd_minmax();
+
+	command-line arguments: (data index)
+	
+	Gives the values of the minimum and maximum elements in the list.
+
+void cmd_mul();
+
+	command-line arguments: (input data index) (output data index) (number)
+
+	Multiplies (number) with each element in the input data list.
+
+void cmd_prob();
+
+	command-line arguments: (input data index) (output data index (x)) (output data index (y)) (minimum value) (maximum value) (number of bins) (total number of elements in the list)
+	
+	Puts the data in the input list into bins.
+	
+void cmd_rdm();
+
+	command-line arguments: (data index) (number)
+	
+	Computes a reduced moment of the data.
+	
+void cmd_receive();
+
+	Tells the master process to collect all data from the slaves in a parallel computation.
+	
+void cmd_sd();
+
+	Shows which data indices are free and which are occupied.
+	
+void cmd_send();
+
+	Tells each slave process to send its data to the master in a parallel computation.
+	
+void cmd_stdev();
+
+	command-line arguments: (data index)
+	
+	Gives the standard deviation of the data.
+	
+void cmd_subarray();
+
+	command-line arguments: (input data index first number) (input data index second number) (output data index)
+
+	Subtracts each number in the second data index from its corresponding number in the
+	first data index and stores the difference in the output data index.
+	
+void cmd_surv();
+
+	command-line arguments: (input data index) (output data index)
+	
+	Computes the survival probability based on the survival time data from a previous call
+	to 'prob'.
+	
+void cmd_szd();
+
+	command-line arguments: (data index)
+	
+	Gives the size (in bytes) of the data in (data index).
+	
+void cmd_tag();
+
+	command-line arguments: (input data index) (output data index)
+	
+	Tags a data index for a subsequent 'flt' command.
+	
+void cmd_tcollect();
+
+	command-line arguments: (sum of times data index) (number of times data index) (new sum of times data index) (new number of times data index) (maximum number of energy drops) (number of parallel processes)
+	
+	Collects the 'avgtdrop' data from all processes.
+	
+void cmd_text();
+
+	command-line arguments: (data index) (file)
+	
+	Saves the data in (data index) in text format to (file).
+	
+// file
+
+void cmd_load();
+
+	command-line arguments: (data index) (file) (size in bytes)
+	
+	Loads (file) into (data index).
+	
+void cmd_save();
+
+	command-line arguments: (data index) (file)
+	
+	Saves (data index) into (file).
+	
+// list
+
+(values for (list)) are 0 (loop list), 1 (step list), or 2 (save list).
+
+void cmd_dl();
+
+	command-line arguments: (list) (list index)
+	
+	Deletes an entry from (list).
+	
+void cmd_sl();
+
+	command-line arguments: (list)
+	
+	Shows all entries in (list).
+	
+// loop
+
+void cmd_lp();
+
+	command-line arguments: (loop index) (number of runs)
+	
+	Runs the simulation (number of runs) times.
+	
+void cmd_lpseed();
+
+	command-line arguments: (loop index) (data index) (number of elements)
+	
+	Uses the values in (data index) as random number seeds for future runs.
+	
+void cmd_lpseed64();
+
+	command-line arguments: (loop index) (data index low) (data index high) (number of elements)
+	
+	Uses the values given by (data_index_high*2^32+data index_low) as random number seeds for future runs.
+	
+void cmd_randinit();
+
+	command-line arguments: (loop index) (initial magnetization)
+	
+	Loads a random spin configuration into the initial lattice.
+	
+void cmd_sizelin();
+
+	command-line arguments: (loop index) (minimum value) (increment) (iterations)
+	
+	Increments the linear size of the lattice by (increment) after every (iterations) runs.
+	
+void cmd_tsc();
+
+	command-line arguments: (loop index)
+	
+	Uses the processor's time stamp as the random number seed.
+	
+void cmd_tsc64();
+
+	command-line arguments: (loop index)
+	
+	Uses the processor's time stamp as the 64-bit random number seed.
+	
+// plot
+
+void cmd_active();
+
+	command-line arguments: (flips data index) (plot steps) (spin) (data file name) (plot file name)
+	
+	Plots the lattice with the active spins highlighted in white.
+	
+void cmd_animate();
+
+	command-line arguments: (flips data index) (energy data index) (plot type) (spin) (beginning step) (ending step) (number of steps between frames) (number of seconds to delay between frames) (data file name) (plot file name)
+	
+	Animates the lattice.
+	Choices for (plot type) are 0 (plots frames at regular intervals) or 1 (allows the user to manually evolve the lattice).
+	
+void cmd_animatert();
+
+	command-line arguments: (flips data index) (energy data index) (time data index) (plot type) (spin) (beginning time) (ending time) (time between frames) (number of seconds to delay between frames) (spins data file name) (spins plot file name) (animation data file name) (animation plot file name)
+	
+	Animates the lattice.
+	Choices for (plot type) are 0 (plots frames at regular intervals) or 1 (allows the user to manually evolve the lattice).
+	The spins plot file is run first in Matlab, and then the animation plot file is run.
+	
+void cmd_bregplot();
+
+	command-line arguments: (blinker regions data index) (data file name) (plot file name)
+	
+	Plots the blinker regions obtained from a previous call to 'breg'.
+	
+void cmd_bregplotm();
+
+	command-line arguments: (blinker regions data index) (data file name) (plot file name)
+	
+	Plots the blinker regions obtained from a previous call to 'breg' in Matlab.
+	
+void cmd_clspins();
+
+	command-line arguments: (cluster number) (data file name) (plot file name)
+	
+	Plots the spins in the specified cluster.
+	
+void cmd_spins();
+
+	command-line arguments: (flips data index) (type of graphics) (plot steps) (spin) (data file name) (plot file name)
+	
+	Plots the spins in the lattice.
+	Values for (type of graphics) are 0 (Gnuplot) or 1 (Matlab).
+	
+void cmd_xy();
+
+	command-line arguments: (x data index) (y data index) (data file name) (plot file name)
+	
+	Saves the data in xy-format in a text data file.
+	
+// run
+
+void cmd_run();
+
+	Begins the simulation(s).
+	
+// save
+
+void cmd_adddata();
+
+	command-line arguments: (save index) (input data index) (output data index) (number of elements)
+	
+	Adds data from (input data index) to (output data index) after each simulation.
+	(number of elements) is the total number of elements saved to the output data index after
+	all simulations are run.
+	
+void cmd_brdim();
+
+	command-line arguments: (save index) (step data index) (flips data index) (blinker regions dimensionality data index) (number of elements)
+	
+	Saves the dimensionality of the blinker regions that were responsible for a long-lived
+	constant-energy metastable state.
+	
+void cmd_chksameg();
+
+	command-line arguments: (save index) (data index) (number of runs)
+	
+	If there are only two clusters in the final state and they both have the same genus,
+	then a '0' is written.
+	If there are only two clusters in the final state and they have different genuses,
+	then a '1' is written.
+	If there is only one cluster or if there are more than two clusters in the final state,
+	then a '2' is written.
+	
+void cmd_constean();
+
+	command-line arguments: (save index) (step data index) (previous steps data index) (time elapsed data index) (flips data index) (energy data index) (spin) (animation steps) (number of animations)
+	
+	Animates each run just before it falls out of a long-lived metastable state.
+	
+void cmd_constebr();
+
+	command-line arguments: (save index) (step data index) (previous steps data index) (time elapsed data index) (flips data index) (energy data index) (spin) (animation steps) (number of animations)
+	
+	Plots the blinker regions for each run that were responsible for its long-lived metastable state.
+	
+void cmd_fa();
+
+	command-line arguments: (save index) (data index) (number of runs)
+	
+	Saves the number of active spins at the end of each run.
+	
+void cmd_fbr();
+
+	command-line arguments: (save index) (data index) (number of runs)
+	
+	Saves the volume of the blinker regions at the end of each run.
+	
+void cmd_fcl();
+
+	command-line arguments: (save index) (number of clusters data index) (genus data index) (number of runs)
+	
+	Saves the number of clusters and the maximum genus of all clusters at the end of each run.
+	
+void cmd_fe();
+
+	command-line arguments: (save index) (data index) (number of runs)
+	
+	Saves the energy at the end of each run.
+	
+void cmd_fm();
+
+	command-line arguments: (save index) (data index) (number of runs)
+	
+	Saves the magnetization at the end of each run.
+	
+void cmd_fs();
+
+	command-line arguments: (save index) (data index) (number of runs)
+	
+	Saves the number of steps that elapsed in each run.
+	
+void cmd_ft();
+
+	command-line arguments: (save index) (data index) (number of runs)
+	
+	Saves the time at the end of each run.
+	
+void cmd_numbr();
+
+	command-line arguments: (save index) (data index) (number of runs)
+	
+	Saves the number of blinker regions at the end of each run.
+	
+void cmd_perc();
+
+	command-line arguments: (save index) (maximum number of directions) (percolation in x) (percolation in y) (percolation in z) (number of runs)
+	
+	After each run, 'perc' determines whether each cluster in the final state percolates in the x, y,
+	and/or z directions. If there is percolation in the (x,y,z) directions, then
+	(percolation in x,y,z) is set to 1. Otherwise, (percolation in x,y,z) is set to zero.
+	
+	If the cluster that percolates the most percolates in only one direction, then (maximum
+	number of directions) is set to 1.
+
+	If the cluster that percolates the most percolates in two directions, then (maximum
+	number of directions) is set to 2.
+
+	If the cluster that percolates the most percolates in three directions, then (maximum
+	number of directions) is set to 3.
+
+void cmd_plotfbr();
+
+	command-line arguments: (save index) (number of runs to plot)
+	
+	Plots the blinker regions in the final state of each run.
+	
+void cmd_pseudobl();
+
+	command-line arguments: (save index) (volume data index) (dimensionality data index) (I_x data index) (I_y data index) (I_z data index) (number of runs)
+	
+	After each run, 'pseudobl' save statistics on the two longest-lived pseudo-blinkers in the lattice.
+	
+	(volume data index) contains the total number of spins in the pseudo-blinker configuration.
+	(dimensionality data index) is set to
+		0 if there were no pseudo-blinkers in the final state
+		1 if all pseudo-blinker spins have the same value for two of the (x,y,z) coordinates
+		2 if all pseudo-blinker spins have the same value for one of the (x,y,z) coordinates (planar pseudo-blinkers)
+		3 if the pseudo-blinker regions are volumetric
+	(I_x, I_y, I_z data indices) contain the moments of inertia of the pseudo-blinker configuration about the (x,y,z) axes, respectively.
+	
+void cmd_svlat();
+
+	command-line arguments: (save index) (number of runs) (file name prefix)
+	
+	After each run, 'svlat' saves the final lattice after first driving with an up
+	infinitesimal field and then after driving with a down infinitesimal field.
+	
+	(file name prefix) is an integer.
+
+	Each lattice file name takes the following format:
+	
+	after driving with an up field: u-(file name prefix)-(seed)
+	after driving with a down field: d-(file name prefix)-(seed)
+		
+void cmd_svseed();
+
+	command-line arguments: (save index) (data index) (number of runs)
+	
+	Saves the random number seed used for each run.
+	
+void cmd_svseed64();
+
+	command-line arguments: (save index) (data index low) (data index high) (number of runs)
+	
+	Saves the random number seed used for each run (data_index_high*2^32+data index_low = seed).
+	
+// set
+
+void cmd_af();
+
+	command-line arguments: (sign of first spin in lattice)
+	
+	Sets the initial lattice in an antiferromagnetic state.
+	
+void cmd_bc();
+
+	command-line arguments: (boundary conditions in x) (boundary conditions in y) (boundary conditions in z)
+	
+	Sets the boundary conditions (0=free, 1=periodic).
+	
+void cmd_bias();
+
+	command-line arguments: (bias field)
+	
+	Sets an infinitesimal bias magnetic field (1=infinitesimal + field, -1=infinitesimal - field, 0=no field)
+	
+void cmd_blkinit();
+
+	command-line arguments: (linear size of each block)
+	
+	Sets the initial lattice with alternating blocks of up and down spins.
+	
+void cmd_block();
+
+	command-line arguments: (spin) (x start) (x end) (y start) (y end) (z start) (z end)
+	
+	Sets the initial lattice with a block of spins of the specified sign.
+	
+void cmd_ev();
+
+	command-line arguments: (bias field) (boundary conditions in x) (boundary conditions in y) (boundary conditions in z) (number of spins in x direction) (number of spins in y direction) (number of spins in z direction) (maximum time to run each simulation) (forcing method)
+	
+	Combines the 'bias', 'bc', 'size', and 'time' commands.
+	
+	If (forcing method) is set to 0, the system is evolved normally.
+	If (forcing method) is set to 1, the system is driven with an infinitesimal bias field that changes
+	sign each time the energy drops.
+	If (forcing method) is set to 2, the system is driven with an infinitesimal bias field that changes
+	sign with probability 1/2 each time the energy drops.
+	
+void cmd_ldinit();
+
+	Copies the initial lattice into the current lattice.
+	
+void cmd_ldlat();
+
+	Copies the current lattice into the initial lattice.
+	
+void cmd_randlat();
+
+	command-line arguments: (magnetization)
+	
+	Sets the initial lattice to a random configuration.
+	
+void cmd_seed();
+
+	command-line arguments: (seed)
+	
+	Sets (seed) as the seed of the random number generator.
+	
+void cmd_seed64();
+
+	command-line arguments: (seed low) (seed high)
+	
+	Sets (seed_high*2^32+seed_low) as the seed of the random number generator.
+	
+void cmd_settsc();
+
+	Uses the processor's time stamp as the seed of the random number generator.
+	
+void cmd_size();
+
+	command-line arguments: (number of spins in x direction) (number of spins in y direction) (number of spins in z direction)
+	
+	Sets the dimensions of the lattice.
+	
+void cmd_sp();
+
+	Shows the values of parameters for the lattice.
+	
+void cmd_time();
+
+	command-line arguments: (maximum time to run each simulation)
+	
+	Sets the maximum time to run each simulation.
+	
+// step
+
+void cmd_avgtdrop();
+
+	command-line arguments: (step index) (sum of times data index) (number of times data index) (maximum number of energy drops)
+	
+	Saves the average time between drops in energy as a function of the number of each energy drop.
+	
+	If simulations are run in parallel, 'tcollect' must be called after 'receive' so the master process
+	can combine the data in the arrays.
+	
+	After all processing is done, 'divarray' is called to get the average time at each energy drop.
+	
+void cmd_chk();
+
+	command-line arguments: (step index)
+	
+	Checks for the final state of each simulation.
+	
+void cmd_del();
+
+	command-line arguments: (step index) (data index)
+	
+	Frees (data index) from memory.
+	
+void cmd_edrop();
+
+	command-line arguments: (step index) (data index) (number of runs)
+	
+	Saves the number of drops in energy in each simulation.
+	
+void cmd_flips();
+
+	command-line arguments: (step index) (data index) (maximum number of steps)
+	
+	Saves the history of the lattice.
+	
+void cmd_force();
+
+	command-line arguments: (step index) (additional time to run the simulation)
+	
+	Forces the lattice into its final state if it exceeds the maximum allowed time.
+	The simulation is then run a little longer to allow the blinker regions to fill in.
+	
+void cmd_forceend();
+
+	command-line arguments: (step index) (number of energy drops data index) (difference in energy data index) (additional time to run the simulation) (number of runs)
+	
+	Forces the lattice into its final state if it exceeds the maximum allowed time.
+	
+	(number of energy drops data index) contains the number of energy drops causes by
+	the infinitesimal bias field after each simulation has run past its allowed time.
+	
+	(difference in energy data index) contains the difference between the energy
+	before driving and the energy after driving each system.
+	
+	The simulation is then run a little longer to allow the blinker regions to fill in.
+	
+void cmd_forceenda();
+
+	command-line arguments: (step index) (number of energy drops data index) (difference in energy data index) (additional time to run the simulation) (number of runs)
+	
+	Forces the lattice into its final state if it exceeds the maximum allowed time.
+	
+	(number of energy drops data index) contains the number of energy drops causes by
+	the infinitesimal bias field after each simulation has run past its allowed time.
+	
+	(difference in energy data index) contains the difference between the energy
+	before driving and the energy after driving each system.
+	
+	The simulation is then run a little longer to allow the blinker regions to fill in.
+	
+	The difference between 'forceenda' and 'forceend' is that 'forceenda' reverses the
+	sign of the bias field after every energy drop, whereas 'forceend' reverses the sign
+	of the bias field after the number of active spins reaches zero.
+	
+void cmd_getcutoff();
+
+	command-line arguments: (step index) (actual final energies data index) (number of spins in the lattice) (fractional difference in energies) (number of runs)
+	
+	After collecting final energy data on many realizations, 'getcutoff' is run.
+	It reads the actual final energies from (actual final energies data index), and when
+	the energy is within (fractional difference in energies) of the actual final energy,
+	the simulation is stopped.
+	
+void cmd_intfcom();
+
+	command-line arguments: (step index) (data index) (steps) (initial center of mass) (positive)
+	
+	(A two-dimensional square blinker region must be created before running 'intfcom'.)
+	
+	Saves the center-of-mass of the interface after each Monte Carlo step.
+	If 'positive' is set to '1', then a spin flipping from -1 to +1 causes the center of mass to
+	increase.
+	If 'positive' is set to '-1', then a spin flipping from +1 to -1 causes the center of mass to
+	increase.
+	
+void cmd_latrng();
+
+	command-line arguments: (step index) (number of runs per process)
+	
+	Saves the lattice and the current random number if the simulation lasted longer than the
+	cutoff time.
+
+void cmd_longdrop();
+
+	command-line arguments: (step index) (step data index low) (step data index high) (number of runs)
+	
+	Saves statistics on the longest constant-energy metastable state for each simulation.
+
+	(step data index low) and (step data index high) contain the step at which the energy dropped
+	to end the longest constant-energy metastable state.
+	(step data index low) and (step data index high) are the low and high 32 bits of the
+	number of steps a simulation ran for, respectively.
+	
+void cmd_magstop();
+
+	command-line arguments: (step index) (magnetization)
+	
+	Stops a simulation after the lattice's magnetization equals the given value.
+	
+void cmd_stop();
+
+	command-line arguments: (step index) (maximum number of steps)
+	
+	Stops a simulation after the specified number of Monte Carlo steps have elapsed.
+	
+void cmd_stoplong();
+
+	command-line arguments: (step index) (step data index low) (step data index high) (number of runs)
+	
+	Stops a simulation after its longest constant-energy metastable state ends.
+	
+	(step data index low) and (step data index high) are filled in by 'longdrop'.
+	(step data index low) and (step data index high) are the low and high 32 bits of the
+	number of steps a simulation ran for, respectively.
+	
+void cmd_svact();
+
+	command-line arguments: (step index) (data index) (steps)
+	
+	Saves the number of active spins after each step.
+	
+void cmd_svconste();
+
+	command-line arguments: (step index) (step data index) (previous steps data index) (time elapsed data index) (number of runs)
+	
+	Saves statistics on the longest constant-energy metastable state for each simulation.
+
+	(step data index) contains the step at which the energy dropped to end the longest
+	constant-energy metastable state.
+	
+	(previous steps data index) contains the number of Monte Carlo steps in the longest
+	constant-energy metastable state.
+	
+	(time elapsed data index) contains the time elapsed in the longest constant-energy
+	metastable state.
+	
+void cmd_sven();
+
+	command-line arguments: (step index) (data index) (steps)
+	
+	Saves the energy after each step.
+	
+void cmd_svmag();
+
+	command-line arguments: (step index) (data index) (steps)
+	
+	Saves the magnetization after each step.
+	
+void cmd_svtm();
+
+	command-line arguments: (step index) (data index) (steps)
+	
+	Saves the time after each step.
+	
+void cmd_svtmdrop();
+
+	command-line arguments: (step index) (data index) (steps)
+	
+	Saves the time intervals between energy drops.
+
+void cmd_tdropvst();
+
+	command-line arguments: (step index) (times data index) (drop times data index) (maximum number of energy drops combined for all realizations)
+	
+	Saves the time between drops in energy as a function of time.
+
+	(maximum number of energy drops combined for all realizations) = (number of spins in one realization) * (number of realizations)
+	
